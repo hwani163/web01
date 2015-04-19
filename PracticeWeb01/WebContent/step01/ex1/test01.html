@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!-- 
+	HTML : 컨텐츠 및 UI르ㄹ 정의
+	CSS : 컨텐츠와 UI의 레이아웃 및 스타일 설정.
+	
+	
+	[셀렉터 문법정리]
+	
+	* 모든 엘리먼트를 선택한다.
+	h2 {} => h2엘리먼트를 선택
+	div p{} => div의 모든자손인 p를 찾아 p의 값을 Setting
+	div > p{} => div의 직계 자식인 p를 찾아 p의 값을 Setting해준다.
+	div:first-child  =>누군가의 첫번째 자식인 div를 찾아 div의 값을 Setting
+	
+	a:link		=> 아직 방문하기 전상태인 a를 찾아 그놈의 환경값을 Setting
+	a:visited	=> 1번이상 방문한 상태인 a를 찾아 그놈의 환경값을 Setting해준다.
+	
+	E1 : active 	=> 현재 활성화중인 새끼의 엘리먼트를 찾아 그놈의 환경값을 Setting
+	E1 : hover		=> 마우스 포인터가 놓은 E1을 선택하여 그놈의 값을 Setting
+	E1 : focus		=> 키보드 이벤트를 받는 상태의 E를 선택하여 그놈의 값을 Setting
+	
+	E1+E2		=> E1다음에바로오는 E2를 선택 E2의 값을 선택하여 값을 Setting
+	
+	E1[selected]		=> selected 된 애들 모두 선택한다.
+	E1[foo="aaa"]	=> foo속성의 값이 "aaa"인 놈 선택하여 값바꿈
+	
+	E.aaa					=> aaa라는 클래스에 소속된 E를 선택
+	E#aaa				=> aaa라는 아이디 값을 가지는 E를 선택한다.
+	
+	
+	
+	
+	
+	
+	
+	
+ -->
+<html>
+<head>
+<style type="text/css">
+
+	h2{
+	color: red;}
+	div p{
+	color: blue;
+	}
+	
+
+
+</style>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div>
+		<h1>div1111111</h1>
+		<nav>
+			<h2>제목 1</h2>
+			<p>내용 내용 내용 내용 내용</p>
+			<h2>제목 2</h2>
+			<p>내용2 내용2 내용2 내용2 내용2</p>
+		</nav>
+
+		<h1>div2222222</h1>
+		<nav>
+			<h2>제목 3</h2>
+			<p>내용3 내용3 내용3 내용3 내용3</p>
+			<h2>제목 4</h2>
+			<p>내용4 내용4 내용4 내용4 내용4</p>
+		</nav>
+		<p>내용5 내용5 내용5 내용5 내용5</p>
+	</div>
+	<p>내용6 내용6 내용6 내용6 내용6</p>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+
+*{
+	border-style: dotted;
+	border-width: 1px;
+	border-color: red;	
+	padding: 5px 10px 5px 10px;
+}
+
+h1,h2{
+margin: 0;
+}
+
+/* nav#nav_dev{
+background-color: gray;} */
+/* p.dev{
+background-color: green;
+} */
+/* p.fav{
+background-color: yellow;} */
+
+/* h1+nav{
+background-color: blue;} */
+
+h1 ~ nav{
+/*h1 다음에 오는 h2를 선택하기 바로뒤에 없어도 된다.! CSS3.0에 추가된 내용이다.*/
+background-color: yellow;
+}
+
+
+</style>
+</head>
+<body>
+	<div>
+	
+		<h1>석환 의 개발</h1>
+		<nav id="nav_dev">
+			<h2 class="dev ti1">웹프로그래밍</h2>
+			<p class="dev par1">웹프로그래밍의 paragraph</p>
+			<h2 class="dev ti2">자바</h2>
+			<p class="dev par2">자바의 paragraph</p>
+		</nav>
+	</div>
+
+	<div>
+		<h1>석환 의 관심사</h1>
+		<nav id = "nav_fav">
+			<h2 class ="fav ti1">Shopping</h2>
+			<p class="fav par1">shpping의 paragraph</p>
+			<h2 class="fav ti2">음악</h2>
+			<p class="fav par2">music의 paragraph</p>
+		</nav>
+	</div>
+	<br>
+	<p>이 자료는 석환 의 것 입니다.</p>
+
+
+</body>
+</html>
