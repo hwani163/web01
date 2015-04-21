@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test02</title>
+</head>
+<body>
+
+	<script>
+		"use strict";
+		/*
+		 *	실습목표 : switch
+		 */
+		 var level =1;
+		 switch (level) {
+		case 0:	console.log("손님"); break;
+		case 1:	console.log("일반 사용자"); break;
+		case 2:	console.log("관리자"); break;
+		default: console.log(	"승인전 사용자"); break;
+		}
+
+		 
+		 switch (typeof new String("10")) {
+		case 'number': console.log("숫자 입니다."); 	break;
+		case "string": console.log("string 입니다."); 	break;
+		case 'object': console.log("object 입니다."); 	break;
+		case 'boolean': console.log("boolean 입니다."); 	break;
+		default:console.log("기타 자료형 입니다.");			break;
+		}
+	</script>
+
+</body>
+</html>
