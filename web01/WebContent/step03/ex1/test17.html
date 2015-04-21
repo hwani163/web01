@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test15</title>
+</head>
+<body>
+
+<script>
+"use strict";
+
+// 실습 목표: 데이터 변환
+// 1) boolean 형으로 변환
+console.log(Boolean(0));
+console.log(Boolean(1));
+console.log(Boolean(-1));
+console.log(Boolean(' '));
+console.log(Boolean('  '));
+console.log(Boolean('true'));
+console.log(Boolean('false'));	//true  , 빈문자열인경우에만 false이고 나머지는 다 true이다.
+console.log(Boolean(null));
+console.log(Boolean(undefined));
+console.log(Boolean(NaN));
+
+//num 형으로 변환
+console.log(Number(true));
+console.log(Number(false));
+console.log(Number(''));
+console.log(Number('  '));
+console.log(Number('12'));	//12
+console.log(Number('017'));	//17
+console.log(Number('true'));
+console.log(Number('false'));	
+console.log(Number(null));
+console.log(Number(undefined));
+console.log(Number(NaN));
+console.log(Number('25000원'));
+console.log(Number('$25000'));
+console.log(parseInt('25000원'));
+console.log(parseInt('$25000'));
+
+
+//string 형으로 변환
+console.log(String(true));
+console.log(String(false));
+console.log(String(12));	//12
+
+//console.log(String(017));	// strict 모드에서는 8진수 표현 불 가
+
+console.log(String(null));
+console.log(String(undefined));
+console.log(String(NaN));
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
