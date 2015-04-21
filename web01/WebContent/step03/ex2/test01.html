@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test19</title>
+</head>
+<body>
+
+<script>
+"use strict";
+/*
+ *	실습목표 : 선택 연산자(|| , &&)
+ *	-	논리 연산자를 선택 연산자로 활용
+ *		1) || 연산자 : 앞의 값을 boolean으로 변환 후 테스트 해서 true이면 앞의 값을 Return한다.
+ */
+
+ 	var a = 42;
+ 	var b = "abc";
+ 	var x ;
+ 	
+ 	a || (x = "hahahaha");
+ 	console.log(x);
+
+ 	x = a || b;
+ 	console.log(x);
+ 	console.log("-------------------------------");
+ 	
+ 	console.log(0 || "hahahahahaha");		//hahaha
+ 	console.log(42 || "hahahahahaha");		//42
+ 	console.log("" || "hahahahahaha");		//hahahaha
+ 	console.log(" " || "hahahahahaha");		//빈문자열
+ 	console.log("true" || "hahahahahaha");		//"true"
+ 	console.log("false" || "hahahahahaha");	//"false	"
+ 	console.log("abc" || "hahahahahaha");	//abc
+ 	console.log(true || "hahahahahaha");	//true
+ 	console.log(false || "hahahahahaha");	//hahaha
+ 	console.log(null || "hahahahahaha");	//hahahaha	
+ 	console.log(undefined || "hahahahahaha");	//hahaha	
+ 	console.log(NaN || "hahahahahaha");	//hahahaha
+ 	console.log(null || true);
+ 	
+ 	
+ 	//2) && 선택 연산자
+ 	/*	- 첫번째 값은 boolean 테스트 결과가 false이면 첫번째 결과가 놓인다.
+ 			첫번째 값의 boolean결과가 true이면 , 두번 째 결과가 놓 인다.
+ 			논리 AND는 두 피 연산자 모두 true일 때 최종 결과가 true가 된다.
+ 			따라서 첫번째 값이 false이면 두번째는 실행 하나 마나 이다.
+ 			그래서 &&는 이 원리를 바탕으로 동작한다.
+ 	
+ 	*/
+ 	console.log("-------------------------------");
+ 	console.log(0 				&& "hahahahahaha");		//0
+ 	console.log(42 				&& "hahahahahaha");		//hahahaha
+ 	console.log(""				&& "hahahahahaha");		//""
+ 	console.log(" " 				&& "hahahahahaha");		//hahahaha
+ 	console.log("true" 		&& "hahahahahaha");		//hahahaha
+ 	console.log("false" 		&& "hahahahahaha");	//hahahaha
+ 	console.log("abc" 			&& "hahahahahaha");	//hahahaha
+ 	console.log(true 			&& "hahahahahaha");	//hahahaha
+ 	console.log(false 			&& "hahahahahaha");	//false
+ 	console.log(null 			&& "hahahahahaha");	//null
+ 	console.log(undefined 	&& "hahahahahaha");	//undefined
+ 	console.log(NaN 			&& "hahahahahaha");	//Nan
+ 	
+ 	
+ 	
+ 	
+ 	
+	
+</script>
+
+</body>
+</html>

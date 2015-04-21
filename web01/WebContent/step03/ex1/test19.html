@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test19</title>
+</head>
+<body>
+
+<script>
+"use strict";
+// 실습 목표: ===
+	//null 의 타입은 Object 이지만 null 그대로 평가 하여라
+	
+	console.log("null"==null);
+	console.log("0"==undefined);
+	console.log("0"==false);		//string== boolean => "0"==> 0
+	console.log("0"==NaN);		//String "0"을 숫자 0으로 바꾼다음 NaN과 비교한다. 결과는 False
+	console.log(typeof NaN);
+	console.log("0"==0);		//String 0이 숫자로 바뀐다음 비교한다.
+	console.log(" "=="0");	//둘다 문자열이기때문에 숫자로 바꾸면 안된다
+	console.log("-----------------------------------------------------");
+	console.log(false ==null);		// false ->  null 을 다른 타입으로 변환하지 않는다.
+	console.log(false==undefined);
+	console.log(false==NaN);
+	console.log(false==0);
+	console.log(false=="");
+	console.log(false == []); //false가 0으로 바뀐다.
+	console.log(false=="");
+	console.log("-----------------------------------------------------");
+	
+	console.log(""==null);	//false
+	console.log(""==undefined);
+	console.log(""==NaN);
+	console.log(""==0);
+	console.log(""==[]);		//String == Object
+	console.log(""=={});
+	console.log("---------------------------");
+	console.log(0==null);		//null은 그대로 비교한다. 숫자로 바꾸지 않고 그래서 false
+	console.log(0== undefined);	//false
+	console.log(0== NaN);
+	console.log(0==[]);
+	console.log(0=={});
+	
+	
+	/**/
+	/*https://github.com/dorey/JavaScript-Equality-Table*/
+	
+</script>
+
+</body>
+</html>
