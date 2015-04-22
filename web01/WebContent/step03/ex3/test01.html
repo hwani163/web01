@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex3-test01</title>
+</head>
+<body>
+<script type="text/javascript">
+
+/*함수
+ * function 함수명(파라미터)}{
+	 1)리턴 타입이 없다. (이유? 자바스크립트는 명시적인 타입이 없다.)
+	 2) 파라미터 선언시 타입을 var를 선언 하지 않는다.
+ }
+ */
+ 
+ function plus(a,b) {
+	return a+b;
+}
+ var result = plus(10,20);
+ console.log("결과" , result);
+ 
+ //2) 함수 선언 위치와 호출 위치의 관계
+ //함수를 선언전에 호출 할 수 있다.
+ // 이유는??
+//		Script태그 에서는 항상 함수 선언문을 찾아서 먼저 실행 한다.
+// 그렇다면 다른 스크립트에 선언된 함수를 호출 할 수 있을 까?
+    //아직 다음 스크립트 태그를 실행 하기 전 이기 때문에 multiple() 을 호출 할 수 업다.
+    //항상 스크립트 태그를 실행 완료해야만 다음 스크립트 태그를 실행 할 수 있다.
+ result = minus(10,20);
+    
+ function minus(a,b) {
+	return a-b;
+}
+ console.log("a-b",result);
+console.log("a*b" , multiple(10,2));
+ 
+ 
+</script>
+
+<script>
+    //이전 스크립트 태그에서 선언한 함수 호출 할 수 있는 가?
+    //있다    -> 스크립트 태그는 순차적으로 실행한다. 스크립트 태그 안에서 선언한 변수나 함수는 window객체의 프로퍼티가 된다.
+//    한 ㅠㅔ이지에 window객체는 하나이다.
+    result = plus(100,200);
+    console.log("a+b = ",result);
+    
+    result = window.minus(1010,10);
+    console.log("a-b = " , result);
+    
+    function multiple(a,b){
+        return a*b;
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<>
+
+<head>
+    <meta charset="UTF-8">
+    <title>ex3-test04</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        "use strict";
+        /*함수레퍼런스 응용
+
+         */
+
+        //1) 바깥에서 함수를 파라미터로 넘기기
+        function plus(a, b) {
+            return a + b;
+        }
+
+        function minus(a, b) {
+            return a - b;
+        }
+
+        //함수의 주소를 파라미터로 넘긴다.
+        function compute(func, a, b) {
+            return func(a, b);
+        }
+
+        console.log(compute(plus, 10, 20));
+        console.log(compute(minus, 10, 20));
+
+
+        //2) 함수로부터 함수주소를 리턴받기
+        function functionFactory(name) {
+            switch (name) {
+            case 'plus':
+                return function (a, b) {
+                    return a + b;
+                };
+            case 'minus':
+                return function (a, b) {
+                    return a - b;
+                };
+            }
+            /*
+            중첩함수(nested function)
+            함수 안에서 만든 함수를 "중첩함수(nested function)" 라고 한다.
+            "클로져(closure)"
+                파라메터로 넘기거나 리턴하는 익명 함수를 말한다.
+                중첩 함수가 사용하는 메모리 영역을 말하기도 한다.
+            */
+        }
+
+        var myfunc = functionFactory('minus');
+        console.log(myfunc(10, 20));
+        
+        //3 파라미터로 클로저(파라미터로 전달하는 익명함수 또는 리턴하는 익명함수)전달하기
+        var result = compute(function(a,b){
+            var r=1;
+            for(var i=0; i<b; i++){
+            r*=a;
+            }
+            return r;
+        }, 2,4)
+        console.log("2의 4승",result);
+    </script>
+</body>
+
+</html>
