@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+    <meta charset="UTF-8">
+    <title>ex4-test02</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        "use strict";
+        /*실습목표 : 객체 생성 단축 표기법
+            
+         */
+      
+      //1) new 연산자를 사용하여 객체 생성하기
+        var score = new Object();
+        function initScore(score , name , kor , eng , math){
+        score.name = name;
+        score.kor = kor;
+        score.eng = eng;
+        score.math =math;
+        score.sum = score.kor + score.eng + score.math;
+        score.avg = score.sum /3;
+        }
+//      2) 객체 생성 단축 표기법
+      var score2={};   //new Object()와 같다.
+      score2.name = "임꺽";
+        score2.kor =100;
+        score2.eng = 100;
+        score2.math =45;
+        score2.sum = score2.kor + score2.eng + score2.math;
+        score2.avg = score2.sum /3;
+      
+       function toString(obj){
+        console.log(obj.name , obj.kor , obj.eng , obj.math , obj.sum , obj.avg);
+      }
+      toString(score);
+      toString(score2);
+      
+      console.log("--------");
+      //3) 단축 표기법2
+      //-{프로퍼티명 : 값 , 프로퍼티명 : 값,...}
+      var score3 ={
+        name:"유관순"
+        ,kor:90
+        ,eng:90
+        ,math:25
+        ,sum:function(){
+          return this.kor+this.eng+this.math;
+        }
+        ,avr:function(){
+          return this.sum()/3;
+        }
+      ,toString:function(){
+        console.log();
+        return this.name +","+
+        this.kor +","+
+        this.eng +","+
+        this.math +","+
+        this.sum() +","+
+        this.avr();
+      }
+      };
+      console.log(score3.toString());
+      console.log(score3);
+      
+      //4)단축 표기법 응용
+//      객체 안에 객체를 둘 수 있다. 어디 까지 둘 수 있는지는 제한 이 없다.
+      var scores ={
+         s01 : {name : "홍길동", age:20}
+        ,s02 : {name : "yoo", age:30}
+        ,s03 : {name : "lim", age:40}
+      };
+      
+//      객체의 프로퍼티 찾아가기
+      console.log(scores.s01.name);
+      console.log(scores.s01.age);
+      
+      console.log(scores["s02"].name);
+      console.log(scores["s02"].age);
+      대괄호를 이용하면 프로퍼티명을 변수를 통하여 제어 할 수 있다.
+      console.log(scores["s03"]["name"]);
+      console.log(scores["s03"]["age"]);
+      
+      var stdId = prompt("조회를 원하는 학생의 번호를 입력하시오!");
+      
+      console.log(scores[stdId].name);
+      console.log(scores[stdId].age);
+      var attrName = prompt("학생의 어떤 정보를 원하세요?");
+      console.log(scores[stdId][attrName]);
+    </script>
+</body>
+
+</html>

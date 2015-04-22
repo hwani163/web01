@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<>
+    <meta charset="UTF-8">
+    <title>ex4-test02</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        "use strict";
+        /*실습목표 : 객체 초기화
+            
+         */
+      
+      //1) 객체를 초기화 하는 단순한 방법
+        var score = new Object();
+        function initScore(score , name , kor , eng , math){
+        score.name = name;
+        score.kor = kor;
+        score.eng = eng;
+        score.math =math;
+        score.sum = score.kor + score.eng + score.math;
+        score.avg = score.sum /3;
+        }
+        
+      //객체 생성
+      var s2 = new Object();
+      var s3 = new Object();
+      //함수를 호출하여 객체를 초기화 시킨다.
+      initScore(s2,"홍길동",100,100,100);
+      initScore(s3,"kill",80,80,80);
+      
+      function toString(obj){
+        console.log(obj.name , obj.kor , obj.eng , obj.math , obj.sum , obj.avg);
+      }
+      //객체 값 출력
+      
+      toString(s2);
+      toString(s3);
+      
+      console.log("-------");
+      
+      //3) 초기화 함수에서 객체를 만들어 리턴하자!
+      function createScore(name , kor , eng , math){
+        var score = new Object();
+        score.name = name;
+        score.kor = kor;
+        score.eng = eng;
+        score.math =math;
+        score.sum = score.kor + score.eng + score.math;
+        score.avg = score.sum /3;
+        return score;
+        }
+      
+      var s4 = createScore("seokhwan",100,100,100);
+      toString(s4);
+
+      console.info("-------");
+      //4) 객체 생성 및 초기화를 더 세련되게 하는 방법!
+      //자바 언어의 클래스 흉내를 내보자
+//      객체 생성후 즉시 호출하여 객체를 초기화 하는 용도로 사용하는 함수를 " 생성자 함수" 라고 부른다.
+//      보통 생성자 함수는 다른 함수와 구분하기 위해서 이름을 대문자로 시작한다.(관례)
+//      그래서 많은 개발자들이 자바 클래스 처럼 이름을 짓는다.
+      function Score(name , kor , eng , math){
+//        hidden변수 this를 사용
+//        단 이 함수는 빈 객체를 생성하는즉시(new다음) 바로 호출 하여야 한다.
+        this.name = name;
+        this.kor = kor;
+        this.eng = eng;
+        this.math =math;
+        this.sum = this.kor + this.eng + this.math;
+        this.avg = this.sum /3;
+        }
+      
+      var s6 = new Score("s",100,50,77);
+      var s7 = new Score("ks",78,80,76);
+      toString(s6);
+      toString(s7);
+     
+               
+    </script>
+</body>
+
+</html>
