@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex5-test04</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//1) Error() 생성자를 사용하여 예외 처리 객체를 만들어 던지자
+		function divide(a, b) {
+			if (arguments.length < 2) {
+				throw "두개의 파라메터가 필요합니다";
+				return a / b;
+			}
+		}
+		console.log(divide(10, 2));
+
+		try {
+			console.log(divide(10));
+		} catch (ex) {
+			console.log(ex.name);
+			console.log(ex.message);
+		}
+
+		console.log("okok");
+	</script>
+	<h2>실행될까?</h2>
+	<script type="text/javascript">
+		console.log("다른 스크립트의 실행")
+	</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+
+//1) throw 예외객체
+// - 예외객체 : 어떤 자바스크립트 객체라도 상관없다.
+//					:자바 스크립트에서도 예외 정보를 다루는 객체를 제공 한다. Error() 생성자 객체이다.
+function divide(a,b) {
+	if (arguments.length<2) {
+		throw"두개의 파라메터가 필요합니다";	//단순히 문자열을 던진다.
+		return a/b;
+	}
+}
+console.log(divide(10,2));
+console.log(divide(10));
+//2) 예외처리를 하지 않으면 자바스크립트는 즉시 실행을 멈춘다.
+// 현재 스크립트 태그에 대해서만 실행을 멈ㅁ춘다.
+// 웹 브라우져는 다음 태그의 처리를 계속한다.
+console.log("okok");	// 이전 줄에서 예외가 발생 했기 때무에 이 줄은 실행 하지 않는다.
+</script>
+<h2>실행될까?</h2>
+<script type="text/javascript">
+console.log("다른 스크립트의 실행")</script>
+</body>
+</html>
