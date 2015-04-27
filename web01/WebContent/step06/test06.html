@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<p id = "e01" class="c1">테스트1</p>
+<p id = "e02" class="c1">테스트1</p>
+<input id="e02" type="text"><br>
+
+<script type="text/javascript">
+//1) 실습목표 : 엘리먼트의 스타일 다루기
+alert("잠시 멈추기");
+
+var firstElement  = document.querySelector('#e01');
+firstElement.style['color'] ="lime";
+firstElement.style['background-color'] ="blue";
+firstElement.style.backgroundColor="red";
+
+
+
+//엘리먼트.style.속성명 ='값';
+//속성명은 중간에 대시(-) 기호를 사용 할 수 없다.
+//그래서 별도로 마련한 퓨ㅡ로퍼티 명을 사용 하라.
+//보통 다음의 규칙을 따른다.
+//background-color    ------->backgrounmdColor
+//padding-left --------------->paddingLeft
+var ee  = document.querySelector('#e02');
+//특정 엘리먼트를 안보이게 하기
+ee.style.disply ="none";
+
+</script>
+</body>
+</html>
