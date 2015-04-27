@@ -46,6 +46,37 @@ app.post('/board/add.do',function(req, res) {
 });
 
 app.get('/board/list.do',function (req, res) {
+	var strQuery = "select bno,title,date_format(cre_date,'%y-%m-%d') as c_date,views from board2";
+	connection.query(strQuery, function(err, rows) {
+		if (err) {
+			console.log(err);
+			return;
+		}
+		res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8'
+			});
+		res.write('<html><head><title>test10</title></head>\n');
+		res.write('<body>');
+		res.write('<h1>게시글</h1>\n');
+		res.write('<table border="1">\n');
+		res.write('<tr>\n');
+		res.write('<th>번호</th>\n');
+		res.write('<th>제목</th>\n');
+		res.write('<th>등록일</th>\n');
+		res.write('</tr>\n');
+		res.write('<tr>\n');
+		for ( var i in rows) {
+		res.write('<td>'+rows[i].bno+'</td>\n');
+		res.write('<td>'+rows[i].title+'</td>\n');
+		res.write('<td>'+rows[i].c_date+'</td>\n');
+		res.write('</tr>\n');
+		}
+		res.end('</body></html>\n');
+		
+		connection.end();
+		});
+});
+
+app.get('/board/list.do',function (req, res) {
 	var strQuery = "select bno,content,title,date_format(cre_date,'%y-%m-%d') as c_date , pwd from board2";
 	connection.query(strQuery, function(err, rows) {
 		if (err) {
@@ -76,13 +107,6 @@ app.get('/board/list.do',function (req, res) {
 		});
 });
 /*
-function doDetail(req, res) {
-	res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8'});
-	res.write('<html><head><title>test10</title></head>\n');
-	res.write('<body>');
-	res.write('<h1>상세정보</h1>');
-	res.end('</body></html>\n');
-}
 
 function doChange(req, res) {
 	res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8'});
@@ -134,7 +158,6 @@ function callHandler(path,req,res,params) {
 	
 }*/
 
-app.listen(1337);
 
 function doError(req,res) {
 	res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8'});
@@ -143,6 +166,7 @@ function doError(req,res) {
 	res.write('<p>작업중 오류발생.</p>');		
 	res.end('</body></html>\n');
 }
+app.listen(1337);
 
 
 

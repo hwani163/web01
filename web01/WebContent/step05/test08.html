@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>step05-test08</title>
+<style type="text/css">
+*{
+border :1px solid red;
+margin: 20px;
+}
+</style>
+</head>
+<body>body
+<h1>이벤트 처리</h1>
+	<div id="d1">d1
+		<div id="d11">d11
+			<div id="d111">d111	<button id="btn01" type="button">test1</button></div>
+		</div>
+		<div id="d12">d12
+			<div id="d121">d21<button id="btn02" type="button" >test2요</button></div>
+		</div>
+	</div>
+	<div id="d2">d2
+		<div id="d21">d21
+			<div id="d211">d11</div>
+		</div>
+		<div id="d22">d22
+			<div id="d222">d222</div>
+		</div>
+	</div>
+
+
+	
+	
+	<br>
+	
+	<br>
+
+
+
+	<script>
+//실습 목표: 버블 차단하기
+// 상위 엘리먼트가 이벤트 처리 하는 것을 막는 경우 , 
+//즉시 동료 리스너가 호출 되는 것을 막는 경우 , 
+
+//
+var btn = document.getElementById('btn01');
+var btn2 = document.getElementById('btn02');
+
+document.getElementById('btn01').onclick = function(event) {
+	alert('테스터');
+	event.stopPropagation();		//propagation(번식하지마라)
+};
+
+document.getElementById('d111').onclick= function(event) {
+	alert('버튼');
+}
+document.getElementById('d11').onclick= function(event) {
+	alert('d11');
+}
+document.getElementById('d1').onclick= function(event) {
+	alert('d1');
+}
+document.body.onclick= function(event) {
+	alert('body');
+}
+
+
+
+//inline JavaScript 사용 => 위의 태그를 보세요
+//태그에 이븐트를 처리하는 자바스크립트 코드를 직접 넣는다.
+//간단한 경우를 제외하고는 사용 하지 말라. 유지보수 꽝이다.
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

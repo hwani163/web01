@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>step05-test09</title>
+<style>
+* {
+  border: 1px solid red;
+  margin: 20px;
+}
+</style>
+</head>
+<body>body
+<h1>이벤트 처리</h1>
+<div id="d1">d1
+  <div id="d11">d11
+    <div id="d111">d111<button id="btn01" type="button">테스트1</button></div>
+  </div>
+  <div id="d12">d12
+    <div id="d121">d121<button id="btn02" type="button">테스트2</button></div>
+  </div>
+</div>
+<div id="d2">d2
+  <div id="d21">d21
+    <div id="d211">d211<button id="btn03" type="button">테스트3</button></div>
+  </div>
+  <div id="d22">d22
+    <div id="d222">d222<button id="btn04" type="button">테스트4</button></div>
+  </div>
+</div>
+<br>
+
+<script>
+//실습 목표: 버블 차단하기
+//- 상위 엘리먼트로 이벤트가 전달되는 것을 막고 싶을 경우,
+//  event.stopPropagation();
+//
+//- 즉시 동료 리스너가 호출되는 것을 막는 경우,
+//  event.stopImmediatePropagation();
+//
+document.getElementById('btn01').addEventListener('click', function(event) {
+	alert('테스트1 하하하하...');
+	//event.stopPropagation(); // 같은 객체에 대해 추가로 등록된 리스너 호출을 승인함. 버블만 막는다.
+	event.stopImmediatePropagation(); // 다음 리스너 호출을 즉시 멈춘다.
+});
+
+document.getElementById('btn01').addEventListener('click', function(event) {
+  alert('테스트1 크하하하하....');
+});
+
+document.getElementById('d111').onclick = function(event) {
+	alert('d111');
+};
+
+document.getElementById('d11').onclick = function(event) {
+  alert('d11');
+};
+
+document.getElementById('d1').onclick = function(event) {
+  alert('d1');
+};
+document.body.onclick = function(event) {
+  alert('body');
+};
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1 id="h01" class="c1">테스트 1</h1>
+<h1 id="h02" class="c1">테스트 1</h1>
+<h1 id="h03" class="c2">테스트 1</h1>
+<h1 id="h04" class="c2">테스트 1</h1>
+<script type="text/javascript">
+alert("잠시 멈추기");
+//실습목표: 엘리먼트 찾기
+//1) 아이디로 찾기
+var classList  = document.getElementsByClassName('c2');
+
+
+//2) 엘리먼트의 컨텐츠 변경하기
+classList[0].innerHTML ="하이루";
+
+</script>
+</body>
+</html>

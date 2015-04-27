@@ -56,13 +56,14 @@ app.post('/board/add.do', function(req, res) {
 
 app.get('/board/list.do', function(req, res) {
 	connection.query(
-	  "select bno, title, content, date_format(cre_date,'%Y-%m-%d') as cdate , views from board2", 
+	  "select bno, title,views, content, date_format(cre_date,'%Y-%m-%d') as cdate , views from board2", 
 	  function(err,rows){
 		if (err){
 		  console.log(err);
 		  doError(req, res);
 		  return;
 		} 
+		console.log(rows);
 		
 		res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8'});
 		res.write('<html><head><title>test10</title></head>\n');
@@ -80,7 +81,7 @@ app.get('/board/list.do', function(req, res) {
 		for (var i in rows) {
 			res.write('<tr>\n');
 			res.write('  <td>' + rows[i].bno + '</td>\n');
-			res.write('  <td>' + rows[i].title + '</td>\n');
+			res.write('  <td><a href="detail.do?no='+rows[i].bno+'"</a>' + rows[i].title + '</td>\n');
 			res.write('  <td>' + rows[i].cdate + '</td>\n');
 			res.write('  <td>' + rows[i].views + '</td>\n');
 			

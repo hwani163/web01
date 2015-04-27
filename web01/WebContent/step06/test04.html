@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1 id="h01" class="c1">테스트 1</h1>
+<h1 id="h02" class="c1">테스트 1</h1>
+<h1 id="h03" class="c2">테스트 1</h1>
+<h1 id="h04" class="c2">테스트 1</h1>
+<script type="text/javascript">
+alert("잠시 멈추기");
+//실습목표: 엘리먼트 찾기 ( 얘를 제일 많이 쓴다.)
+//1) 아이디로 찾기
+var firstElement  = document.querySelector('.c2');
+//querySelector는 첫번째 Element만 리턴한다.
+firstElement.innerHTML ="하이루";
+
+var firstElement  = document.querySelector('#h02');
+//querySelector는 첫번째 Element만 리턴한다.
+firstElement.innerHTML ="헐랭";
+
+var firstElement  = document.querySelector('h1');
+//querySelector는 첫번째 Element만 리턴한다.
+firstElement.innerHTML ="ㅎㅎ";
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>step05-test02</title>
+</head>
+<body>
+<h1>이벤트 처리</h1>
+<button id="btn01" type="button" >Test1</button><br>
+<button id="btn02" type="button" >Test2</button><br>
+
+
+
+<script>
+//실습 목표: 이벤트 리스터 등록하기 , onlcilck 과 addEventListener() 섞어서 쓰기
+var btn = document.getElementById('btn01');
+var btn2 = document.getElementById('btn01');
+btn.addEventListener('click' , function(event) {
+	alert('okok2');
+});
+
+btn.onclick = function(event) {
+	alert('okok');
+};
+
+//inline JavaScript 사용 => 위의 태그를 보세요
+//태그에 이븐트를 처리하는 자바스크립트 코드를 직접 넣는다.
+//간단한 경우를 제외하고는 사용 하지 말라. 유지보수 꽝이다.
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
