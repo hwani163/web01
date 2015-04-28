@@ -19,9 +19,18 @@ document.querySelector('#btn1').onclick = function(event) {
 document.querySelector('#btn2').onclick = function(event) {
 	//1) HTTP 요청을 수행하는 객체 준비
 	var xhr = new XMLHttpRequest();
+	//2) 서버 URL 지정
+		//현재 경로를 기준으로 요청 URL을 계산한다.
+		//	현재경로) http://localhost:9999/web1/step07/test01.html
+		
+		
+		//첫번째 파라메터   : 'GET'  OR 'POST'
+		//두번쨰 파라메터 : 요청 URL
+		//세번째 파라메터 : 비동기여부 , false이면 send()를 호출 한 후 서버에서 응답이 올 때 가지 리턴하지 않는다.
 	xhr.open('get', 'sub01.html',false);
 	//3) 서버에 요청하기
 	//GET 방식은 send() 호출할 때 파라메터 값을 넘기지 않는다.
+	//POST 방식은 sends()를 호출 할 때 서버에 보낼 값을 파라메터로 전달 한다.
 	xhr.send(null);
 	
 	//4)서버로 부터 받은 결과를 처리하기
