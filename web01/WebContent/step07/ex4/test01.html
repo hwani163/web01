@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>step07-test01</title>
+</head>
+<body>
+<button id="btn1" type="button">일반요청</button><br>
+<button id="btn2" type="button">nodeJS 로 만든 웹 서버의 요청</button>
+<div id ="message" style='border: 1px red solid'></div>
+
+<script type="text/javascript">
+//실습목표 :  HTML을 다운로드 받은 서버가 아닌 다른 서버로 비동기 요청하기
+// 다음을 실행하면 (비동기 요청을 실행하면 다음과 같은 오류가 발생한다.)
+
+//XMLHttpRequest cannot load http://localhost:1337/hello?name=won. 
+//No 'Access-Control-Allow-Origin' header is present on the requested resource. 
+//Origin 'http://localhost:9999' is therefore not allowed access.
+
+//		비동기 요청의 제약조건
+// 	HTML을 다운로드 받은 서버로만 비동기 요청을 실행 할 수 있다.
+//		이유 : 사용자의 의지와 상관 없는 임의의 요청을 막기 위함이다.
+//		웹 브라우져로 서버에 접속하면 서버로부터 HTML CSS JavaScript 등을 다운받는다.
+// 	다운로드 받은 JavaScript를 자동으로 실행한다. 
+//		이때 JavaScript에 다른 사이트에 비동기 요청을 하는 무한반복하는 자바스크립트 코드가 있다면
+//		사용자의 의지와 상관없이 다른 사이트를 DDos 공격 하는데 참여 하게 된다.
+
+document.querySelector('#btn2').onclick = function(event) {
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(responseData) {
+		if (xhr.readyState ==4) {
+			var element  = document.querySelector('#message');
+			element.innerHTML = xhr.responseText;
+		}
+	};
+	
+	xhr.open('GET', 'http://localhost:1337/hello?name=won',true);
+	xhr.send(null);
+};
+
+</script>
+</body>
+</html>

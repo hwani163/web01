@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>step07-ex3-test01</title>
+</head>
+<body>
+<h1>비동 기 POST욫어</h1>
+<form method="GET"><!-- 액션 속성의 값이 없으면 현재 유알엘로 요청한다 -->
+이름 : <input id="name" type="text" name="name"><br>
+이름 : <input id="age" type="text" name="age"><br>
+<button>일반 서브미트 요청</button>
+<button id = "btn1" type="button">POST</button>
+
+
+</form>
+
+<script type="text/javascript">
+//실습목표 :  비동기 방식 요청할 때 응답 결과 가져오기 한글 데이터를 URL인코딩 하기
+document.querySelector('#btn1').onclick = function(event) {
+	var xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function(responseData) {
+		console.log(xhr.readyState);
+		if (xhr.readyState ==4) {
+			var element  = document.querySelector('#message');
+			alert(xhr.responseText);
+		}
+	};
+	
+	xhr.open('POST', 'hello.jsp',true);
+	 xhr.setRequestHeader('Content-type' , 'application/x-www-form-urlencoded');
+	 //현재 로컬에서는 한글이 깨지지 않을 것이다.
+	 //그러나 해외에서 우리 서버로 접속하여 테스트 할 때는 깨지는 경우가 있다.
+	 //그러니 로컬에서 테스트 할 때 깨 지지 않았다고 안심하지 말고 반드시 test02.html 처럼 처리하자
+	var params = "name="+encodeURIComponent(document.querySelector('#name').value) + 
+						"&age="+ document.querySelector('#age').value;
+	console.log(params);
+	xhr.send(params);
+};
+
+</script>
+</body>
+</html>

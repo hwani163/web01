@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>step07-ex3-test01</title>
+</head>
+<body>
+<h1>비동 기 POST욫어</h1>
+<form method="GET"><!-- 액션 속성의 값이 없으면 현재 유알엘로 요청한다 -->
+이름 : <input id="name" type="text" name="name"><br>
+이름 : <input id="age" type="text" name="age"><br>
+<button>일반 서브미트 요청</button>
+<button id = "btn1" type="button">POST</button>
+
+
+</form>
+
+<script type="text/javascript">
+//실습목표 :  비동기 방식 요청할 때 응답 결과 가져오기
+document.querySelector('#btn1').onclick = function(event) {
+	var xhr = new XMLHttpRequest();
+	/*
+	비동기방식에서 서버의 응답 결과를 가져 오려면
+	응답 상태를 계속 감시하고 있다가 , 응답이 완료 되었을 때 결과를 사용 해야 한다.
+	요청 상태를 감시하는 함수를 등록해라!
+	*/
+	xhr.onreadystatechange = function(responseData) {
+		console.log(xhr.readyState);
+		if (xhr.readyState ==4) {
+			var element  = document.querySelector('#message');
+			element.innerHTML = xhr.responseText;
+			apert(xhr.responseText);
+		}
+	};
+	
+	xhr.open('POST', 'hello.jsp',true);
+	//post 요청은 반드시 다음 요청 헤더를 설정항여야하나.
+	 xhr.setRequestHeader('Content-type' , 'application/x-www-form-urlencoded');
+	var params = "name="+document.querySelector('#name').value + 
+						"&age="+ document.querySelector('#age').value;
+	xhr.send(params);
+};
+
+</script>
+</body>
+</html>
