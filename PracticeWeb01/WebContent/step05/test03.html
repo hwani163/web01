@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>step05-test01</title>
+</head>
+<body>
+<h1>이벤트 처리</h1>
+<button id ="btn1">버튼 입니닷</button>
+<button id = "btn2">버튼2다</button>
+<script>
+//웹브라우저 호환시키기
+  var btn1 = document.getElementById('btn1');
+  
+  if(btn.addEventListener){
+    btn.addEventListener('click',function(event){
+      alert('하이');
+    });
+  }else{
+    btn.attachEvent('onclick' , function(event){
+      alert('IE8 브라우저 일 경우');
+    });
+  }
+  
+  </script>
+</body>
+</html></html>
+</html>
+
