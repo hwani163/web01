@@ -3,8 +3,8 @@ var app = require('./miniExpress.js');
 var mysql = require('mysql');
 
 // 실습 목표: AJAX 요청 처리하기
-// - /board/list.do 요청에 대해 
-//   응답 헤더에 Access-Control-Allow-Origin 추가하기 
+// - 클라이언트 코드: web01t/WebContent/step08/ex1/board05.html
+// - /board/add.do 요청 처리
 //
 var connection = mysql.createConnection({
 	host    :'localhost',
@@ -16,23 +16,7 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-/* '/board/form.do' 요청이 들어왔을 때 호출될 함수를 등록한다.
- */
-app.get('/board/form.do', function(req, res) {
-	res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8'});
-	res.write('<html><head><title>test10</title></head>\n');
-	res.write('<body>');
-	res.write('<h1>새 글</h1>');
-	res.write('<form action="add.do" method="post">');
-	res.write('제목: <input type="text" name="title" size="50"><br>');
-	res.write('내용: <textarea name="content" rows="6" cols="50"></textarea><br>');
-	res.write('<input type="submit" value="등록"><br>');
-	res.write('</form>');
-	res.end('</body></html>\n');
-});
 
-/* '/board/add.do' 요청이 들어왔을 때 호출될 함수를 등록한다.
- */
 app.post('/board/add.do', function(req, res) {
 	connection.query(
 			'insert into board2(title,content,cre_date) values(?,?,now())',
@@ -45,14 +29,10 @@ app.post('/board/add.do', function(req, res) {
 				} 
 				
 				res.writeHead(200, {
-					'Content-Type': 'text/html;charset=UTF-8',
-					'Refresh': '1;url=list.do'
+					'Content-Type': 'text/plain;charset=UTF-8',
+					'Access-Control-Allow-Origin': '*'
 				});
-				res.write('<html><head><title>test10</title></head>\n');
-				res.write('<body>');
-				res.write('<h1>등록 결과</h1>');
-				res.write('<p>등록 성공입니다!</p>');
-				res.end('</body></html>\n');
+				res.end('ok');
 			});
 });
 
@@ -66,30 +46,13 @@ app.get('/board/list.do', function(req, res) {
 		  return;
 		} 
 		
+		// 웹 브라우저로 JSON 문자열을 보낸다.
+		// - Content-Type을 변경한다.
 		res.writeHead(200, {
-			'Content-Type': 'text/html;charset=UTF-8',
+			'Content-Type': 'text/plain;charset=UTF-8',
 			'Access-Control-Allow-Origin': '*'
 		});
-		res.write('<html><head><title>test10</title></head>\n');
-		res.write('<body>\n');
-		res.write('<h1>게시글</h1>\n');
-		res.write('<a href="form.do">새 글</a><br>\n');
-		res.write('<table border="1">\n');
-		res.write('<tr>\n');
-		res.write('  <th>번호</th>\n');
-		res.write('  <th>제목</th>\n');
-		res.write('  <th>등록일</th>\n');
-		res.write('</tr>\n');
-		for (var i in rows) {
-			res.write('<tr>\n');
-			res.write('  <td>' + rows[i].bno + '</td>\n');
-			res.write('  <td><a href="detail.do?no=' 
-					+ rows[i].bno + '">' + rows[i].title + '</a></td>\n');
-			res.write('  <td>' + rows[i].cdate + '</td>\n');
-			res.write('</tr>\n');
-		}
-		res.write('</table>\n');
-		res.end('</body></html>\n');
+		res.end(JSON.stringify(rows));
 	});
 });
 
