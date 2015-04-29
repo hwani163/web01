@@ -3,10 +3,10 @@ var app = require('./miniExpress.js');
 var mysql = require('mysql');
 
 // 실습 목표: AJAX 요청 처리하기
-// - 클라이언트 코드: web01t/WebContent/step08/ex1/board08.html
-// - /board/change.do 요청 처리
-// - /board/detail.do 요청에 대해 조회수 증가시키기
-//		서버에 오류가 발생하면 클라이언트에게 알리기
+// - 클라이언트 코드: web01t/WebContent/step08/ex1/board09.html
+// - 서버에서 예외가 발생하면 클라이언트에게 알리기 
+//
+
 var connection = mysql.createConnection({
 	host    :'localhost',
 	port : 3306,
@@ -14,31 +14,29 @@ var connection = mysql.createConnection({
 	password : 'java67',
 	database:'java67db'
 });
-	connection.connect();
-	
 
+connection.connect();
 
 app.post('/board/add.do', function(req, res) {
-	try {
-		connection.query(
-				'insert into board2(title,content,cre_date) values(?,?,now())',
-				[req.params['title'], req.params['content']],
-				function(err, result){
-					if (err){
-						console.log(err);
-						doError(req, res);
-						return;
-					} 
-					
-					res.writeHead(200, {
-						'Content-Type': 'text/plain;charset=UTF-8',
-						'Access-Control-Allow-Origin': '*'
-					});
-					res.end('ok');
-				});		
-	} catch (e) {
-		console.log(e);
-	}
+	connection.query(
+		'insert into board2(title,content,cre_date) values(?,?,now())',
+		[req.params['title'], req.params['content']],
+		function(err, result){
+			if (err){
+				console.log(err);
+				doError(req, res, err);
+				return;
+			} 
+			
+			res.writeHead(200, {
+				'Content-Type': 'text/plain;charset=UTF-8',
+				'Access-Control-Allow-Origin': '*'
+			});
+
+			res.end(JSON.stringify({
+			  status: 'success'
+			}));
+		});
 });
 
 app.get('/board/list.do', function(req, res) {
@@ -47,17 +45,19 @@ app.get('/board/list.do', function(req, res) {
 	  function(err,rows){
 		if (err){
 		  console.log(err);
-		  doError(req, res);
+		  doError(req, res, err);
 		  return;
 		} 
-		
-		// 웹 브라우저로 JSON 문자열을 보낸다.
-		// - Content-Type을 변경한다.
+
 		res.writeHead(200, {
 			'Content-Type': 'text/plain;charset=UTF-8',
 			'Access-Control-Allow-Origin': '*'
 		});
-		res.end(JSON.stringify(rows));
+
+		res.end(JSON.stringify({
+			  status: 'success',
+			  data: rows
+		}));
 	});
 });
 
@@ -80,7 +80,7 @@ app.get('/board/detail.do', function(req, res) {
 	  function(err,result){
 		if (err){
 		  console.log(err);
-		  doError(req, res);
+		  doError(req, res, err);
 		  return;
 		} 
 		
@@ -88,7 +88,10 @@ app.get('/board/detail.do', function(req, res) {
 			'Content-Type': 'text/plain;charset=UTF-8',
 			'Access-Control-Allow-Origin': '*'
 		});
-		res.end(JSON.stringify(result));
+		res.end(JSON.stringify({
+			  status: 'success',
+			  data: result
+		}));
 	});
 });
 
@@ -99,7 +102,7 @@ app.post('/board/change.do', function(req, res) {
 		function(err, result){
 			if (err){
 				console.log(err);
-				doError(req, res);
+				doError(req, res, err);
 				return;
 			} 
 			
@@ -107,33 +110,42 @@ app.post('/board/change.do', function(req, res) {
 				'Content-Type': 'text/plain;charset=UTF-8',
 				'Access-Control-Allow-Origin': '*'
 			});
-			res.end('ok');
+			res.end(JSON.stringify({
+				  status: 'success'
+			}));
 		});
 });
 
 app.get('/board/delete.do', function(req, res) {
 	connection.query(
-			'delete from board2 where bno=?',
-			[req.params['no']],
-			function(err, result){
-				if (err){
-					console.log(err);
-					doError(req, res);
-					return;
-				} 
-				
-				res.writeHead(200, {
-					'Content-Type': 'text/plain;charset=UTF-8',
-					'Access-Control-Allow-Origin': '*'
-				});
-				res.end('ok');
+		'delete from board2 where bno=?',
+		[req.params['no']],
+		function(err, result){
+			if (err){
+				console.log(err);
+				doError(req, res, err);
+				return;
+			} 
+			
+			res.writeHead(200, {
+				'Content-Type': 'text/plain;charset=UTF-8',
+				'Access-Control-Allow-Origin': '*'
 			});
+			res.end(JSON.stringify({
+				  status: 'success'
+			}));
+		});
 });
 
-function doError(req, res) {
-	res.writeHead(200, {'Content-Type': 'text/plain;charset=UTF-8',
-		'Access-Control-Allow-Origin': '*'});
-	res.end('작업 처리 중 오류가 발생했습니다.');
+function doError(req, res, err) {
+	res.writeHead(200, {
+		'Content-Type': 'text/html;charset=UTF-8',
+		'Access-Control-Allow-Origin': '*'
+	});
+	res.end(JSON.stringify({
+		status: 'failure',
+		data: err
+	}));
 }
 
 app.listen(1337);

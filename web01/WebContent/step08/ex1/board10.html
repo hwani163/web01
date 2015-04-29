@@ -41,36 +41,9 @@
 
 // 실습 목표: 서버쪽에서 오류가 발생했을 때 클라이언트에서 적절한 조치 취하기
 // - 서버측 코드: node01t/src/ex6/test07.js
-// - 기존에는 서버로부터 ok 또는 오류 HTML을 받았다면,
-//   이번에는 적절한 형식을 갖춘 성공, 실패 메시지를 받는다.
-var xhr = new XMLHttpRequest();
-xhr.onreadystatechange = function(){
-	if (xhr.readyState == 4) { // 서버로부터 응답 결과를 받았다.
-		var result = JSON.parse(xhr.responseText);
-	
-	  if (result.status == 'failure') {
-		  alert('작업을 완료할 수 없습니다.\n' + 
-		            '잠시 후 다시 시도하세요.\n' +
-		            '계속 창이 뜬다면, 관리자에 문의하세요.(사내번호:1112)');
-		  return;
-	  }
-	  
-	  var rows = result.data;
-	  var table = document.querySelector('#boardTable');
-	  var tr;
-	  for (var i in rows) {
-		  tr = document.createElement('tr');
-		  tr.innerHTML = '<td>' + rows[i].bno + '</td>\n' +
-		     '<td><a href="#" onclick="detailInfo(event);" data-no="' + 
-		     rows[i].bno + '">' + 
-		     rows[i].title + '</a></td>\n' +
-		     '<td>' + rows[i].cdate + '</td>\n';
-		  table.appendChild(tr);
-	  }
-	}
-};
-xhr.open('GET', 'http://localhost:1337/board/list.do', true);
-xhr.send(null);
+// 페이지를 다시 로딩 하는 대신에 테이블 데이터만 갱신
+
+refreshBoardTable();
 
 document.querySelector('#addBtn').onclick = function(event) {
 	var xhr = new XMLHttpRequest();
@@ -78,7 +51,7 @@ document.querySelector('#addBtn').onclick = function(event) {
 	  if (xhr.readyState == 4) { // 서버로부터 응답 결과를 받았다.
 		  var result = JSON.parse(xhr.responseText);
 		  if (result.status == 'success') {
-			  location.reload(); // 현재 페이지 갱신
+			  refreshBoardTable();
 		  } else {
 			  alert('작업을 완료할 수 없습니다.\n' + 
 					  '잠시 후 다시 시도하세요.\n' +
@@ -103,7 +76,7 @@ document.querySelector('#changeBtn').onclick = function(event) {
     if (xhr.readyState == 4) { // 서버로부터 응답 결과를 받았다.
     	  	var result = JSON.parse(xhr.responseText);
     	  if (result.status == 'success') {
-        location.reload(); // 현재 페이지 갱신
+    		  refreshBoardTable();
       } else {
         alert('작업을 완료할 수 없습니다.\n' + 
             '잠시 후 다시 시도하세요.\n' +
@@ -148,7 +121,7 @@ document.querySelector('#deleteBtn').onclick = function(event) {
     if (xhr.readyState == 4) { // 서버로부터 응답 결과를 받았다.
     	  var result = JSON.parse(xhr.responseText);
     	  if (result.status == 'success') {
-        location.reload(); // 현재 페이지 갱신
+    		  refreshBoardTable();
       } else {
         alert('작업을 완료할 수 없습니다.\n' + 
             '잠시 후 다시 시도하세요.\n' +
@@ -203,6 +176,48 @@ function detailInfo(event) {
 	  }
 	};
 	xhr.open('GET', 'http://localhost:1337/board/detail.do?no=' + no, true);
+	xhr.send(null);
+}
+
+function refreshBoardTable() {
+	
+	var table = document.querySelector('#boardTable');
+		  
+		  var tr;
+	//기존에 dataRow에 소속된 tr태그를 삭제한다.
+	
+	//서버에서 받아와서 tr태그 생성
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		if (xhr.readyState == 4) { // 서버로부터 응답 결과를 받았다.
+			var result = JSON.parse(xhr.responseText);
+		
+		  if (result.status == 'failure') {
+			  alert('작업을 완료할 수 없습니다.\n' + 
+			            '잠시 후 다시 시도하세요.\n' +
+			            '계속 창이 뜬다면, 관리자에 문의하세요.(사내번호:1112)');
+			  return;
+		  }
+		  
+		  var rows = result.data;
+		  var trList = document.querySelectorAll('.dataRow');
+			for (var i = 0; i < trList.length; i++) {
+				table.removeChild(trList[i]);
+			}
+		  
+		  for (var i in rows) {
+			  tr = document.createElement('tr');
+			  tr.setAttribute('class', 'dataRow');
+			  tr.innerHTML = '<td>' + rows[i].bno + '</td>\n' +
+			     '<td><a href="#" onclick="detailInfo(event);" data-no="' + 
+			     rows[i].bno + '">' + 
+			     rows[i].title + '</a></td>\n' +
+			     '<td>' + rows[i].cdate + '</td>\n';
+			  table.appendChild(tr);
+		  }
+		}
+	};
+	xhr.open('GET', 'http://localhost:1337/board/list.do', true);
 	xhr.send(null);
 }
 
