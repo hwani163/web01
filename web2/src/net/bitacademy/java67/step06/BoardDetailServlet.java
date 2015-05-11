@@ -1,8 +1,9 @@
-package net.bitacademy.java67.step05;
+package net.bitacademy.java67.step06;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /* 실습 목표: 서블릿 초기화 파라메터 사용
  */
 
-//@WebServlet("/step05/detail")
+@WebServlet("/step06/detail")
 public class BoardDetailServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -34,11 +35,14 @@ public class BoardDetailServlet extends HttpServlet {
     out.println("<h1>게시물 상세정보2</h1>");
     
     BoardDao boardDao = new BoardDao();
+    
+    ServletContext ctx = this.getServletContext();
     DBConnectionPool dbPool = new DBConnectionPool(
-        this.getInitParameter("driver"),    //web.xml의 서블릿 초기화 파라미터 가져오기 
-       this.getInitParameter("url") , 
-       this.getInitParameter("user") , 
-       this.getInitParameter("password"));
+        ctx.getInitParameter("driver"),    //web.xml의 Context 초기화 파라미터 가져오기 
+        ctx.getInitParameter("url") , 
+        ctx.getInitParameter("user") , 
+        ctx.getInitParameter("password"));
+    
     boardDao.setDBConnectionPool(dbPool);
     BoardVo board = boardDao.select(
         Integer.parseInt(request.getParameter("no")));

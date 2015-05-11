@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+  version="3.1" >
+
+  <!-- 컨텍스트 초기화 파라미터 선언-->
+  
+  <context-param>
+    <param-name>url</param-name>
+    <param-value>jdbc:mysql://localhost:3306/java67db?useUnicode=true&amp;characterEncoding=utf8</param-value>
+    </context-param>
+    <!-- XML 이나 HTML 에는 &를 쓸수 없다. 쓰려면 &amp; 를 사용해 주어야 한다. -->
+    <context-param>
+    <param-name>driver</param-name>
+    <param-value>com.mysql.jdbc.Driver</param-value>
+    </context-param>
+    
+    <context-param>
+    <param-name>user</param-name>
+    <param-value>java67</param-value>
+    </context-param>
+    <context-param>
+    <param-name>password</param-name>
+    <param-value>java67</param-value>
+    </context-param>
+ 
+</web-app>
+
+
+
+
+
+
+
+
+
+
+
+
+

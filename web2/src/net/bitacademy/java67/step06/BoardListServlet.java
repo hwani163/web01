@@ -1,23 +1,22 @@
-package net.bitacademy.java67.step05;
+package net.bitacademy.java67.step06;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/* 실습 목표: 서블릿 초기화 파라미터 사용 (XML 데이터 활용) web.xml 참고하셈
- * 서블릿 초기화 파라미터에 들어있는 DB정보를 가져와서
- * DB 커넥션 풀에게 넘긴다.
- * 초기화 파라미터 값 가져오기
- * 
+/* 실습 목표: Context 초기화 파라미터 사용 (XML 데이터 활용) web.xml 참고하셈
+ * 먼저 , ServletContext객체를 얻는다 
  * getInitParameter("파라메터 키 값");
-
-@WebServlet("/step05/list") */
+ * getInitParameter("파라메터 키 값");
+*/
+@WebServlet("/step06/list")
 public class BoardListServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -26,12 +25,15 @@ public class BoardListServlet extends HttpServlet {
       HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     
+    //ServletContext : 웹어플리케이션 정보를 다루는 도구
     BoardDao boardDao = new BoardDao();
+    
+    ServletContext ctx = this.getServletContext();
     DBConnectionPool dbPool = new DBConnectionPool(
-        this.getInitParameter("driver"),    //web.xml의 서블릿 초기화 파라미터 가져오기 
-       this.getInitParameter("url") , 
-       this.getInitParameter("user") , 
-       this.getInitParameter("password"));
+        ctx.getInitParameter("driver"),    //web.xml의 Context 초기화 파라미터 가져오기 
+        ctx.getInitParameter("url") , 
+        ctx.getInitParameter("user") , 
+        ctx.getInitParameter("password"));
     
     
     boardDao.setDBConnectionPool(dbPool);
