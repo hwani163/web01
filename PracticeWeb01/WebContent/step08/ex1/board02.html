@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>게시판</title>
+</head>
+<body>
+<h1>게시글</h1>
+<table border="1">
+<tr>
+  <th>번호</th>
+  <th>제목</th>
+  <th>등록일</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><a href="detail.do?no=1">AAAAA</a></td>
+  <td>2015-04-24</td>
+</tr>
+</table>
+
+<script>
+//실습목표 : 서버로부터 받은 JSON 형식의 문자열을 자바 스크립트 객체로 바꿔 사요앟ㄴ다.
+alert("데이터 가져오기");
+
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function(event) {
+	if(xhr.readyState==4){
+		console.log(xhr.responseText);
+	}
+};
+xhr.open('GET', 'http://localhost:1337/board/list.do', true);
+xhr.send(null);
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
