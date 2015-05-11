@@ -23,6 +23,10 @@ public class ManagerList extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     request.setCharacterEncoding("UTF-8");
     response.setContentType("text/html;charset=UTF-8");
+    System.out.println(request.getRemoteAddr());
+    System.out.println(request.getRequestURI());
+    System.out.println(request.getLocalAddr());
+    System.out.println(request.getContextPath());
     ManagerDao managerDao = new ManagerDao();
     managerDao.setDBConnectionPool(new DBConnectionPool());
     List<ManagerVo> list = new ArrayList<ManagerVo>();    

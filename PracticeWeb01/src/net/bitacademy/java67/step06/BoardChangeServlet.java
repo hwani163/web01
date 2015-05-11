@@ -1,4 +1,4 @@
-package net.bitacademy.java67.step05;
+package net.bitacademy.java67.step06;
 
 import java.io.IOException;
 

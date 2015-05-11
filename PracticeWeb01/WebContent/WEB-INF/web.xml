@@ -14,35 +14,31 @@
    -->
   <!-- 서블릿 정보를 등록한다. -->
 
-  <servlet>
-    <servlet-name>BoardListServlet</servlet-name>
-    <servlet-class>net.bitacademy.java67.step05.BoardListServlet</servlet-class>
-    <init-param>
-    <param-name>url</param-name>
-    <param-value>jdbc:mysql://localhost:3306/java67db?useUnicode=true&amp;characterEncoding=utf8</param-value>
-    </init-param>
-    <init-param>
-    <param-name>driver</param-name>
-    <param-value>com.mysql.jdbc.Driver</param-value>
-    </init-param>
-    <init-param>
-    <param-name>user</param-name>
-    <param-value>java67</param-value>
-    </init-param>
-    <init-param>
-    <param-name>password</param-name>
-    <param-value>java67</param-value>
-    </init-param>    
-  </servlet>
+<context-param>
+<param-name>url</param-name>
+<param-value>jdbc:mysql://localhost:3306/java67db?useUnicode=true&amp;characterEncoding=utf8</param-value>
+</context-param>
+
+<context-param>
+<param-name>driver</param-name>
+<param-value>com.mysql.jdbc.Driver</param-value>
+</context-param>
+
+<context-param>
+<param-name>user</param-name>
+<param-value>java67</param-value>
+</context-param>
+
+<context-param>
+<param-name>password</param-name>
+<param-value>java67</param-value>
+</context-param>
+
   
   <!-- 서블릿에 URL을 연결한다. -->
  
 
   
-  <servlet-mapping>
-  <servlet-name>BoardListServlet</servlet-name>
-  <url-pattern>/step05/list</url-pattern>
-  </servlet-mapping>
 </web-app>
 
 

@@ -39,8 +39,8 @@ public class ManagerDetail extends HttpServlet {
 
     out.println("</head>");
     out.println("<body>");
-    out.println("<img name=\"photo\" src="+manager.getPhoto()+">");  
-    out.println("<form  method=\"POST\" action=\"ManagerUpdate\">");
+    out.println("<img name=\"photo\" src=\"img/"+manager.getPhoto()+"\">");  
+    out.println("<form  method=\"POST\" action=\"ManagerUpdate\" enctype=\"multipart/form-data\">");
     out.println("<h1>매니저 상세 정보</h1>");
     out.println("<br>");
 
@@ -63,7 +63,7 @@ public class ManagerDetail extends HttpServlet {
        out.println("<input type=\"text\" value=\""+manager.getTel()+"\"  name=\"tel\" >");
        out.println("<br>");
        out.println("<label for=\"label-name\" class=\"col-sm-6 control-label\">사진</label>");
-       out.println("<input type=\"text\"  value=\""+manager.getPhoto()+"\" name=\"photo\" >");
+       out.println("<input type=\"file\"  value=\""+manager.getPhoto()+"\" name=\"photo\" >");
        out.println("<br>");
        out.println("<input type=\"submit\"value=\"변경\" >");       
        out.println("<button type=\"button\" onclick=\"location.href='ManagerDelete?no="+no+"'\">삭제</button>    ");
