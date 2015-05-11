@@ -1,22 +1,19 @@
-package net.bitacademy.java67.step07;
+package net.bitacademy.java67.step05;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/* 실습 목표: Context 초기화 파라미터 사용 (XML 데이터 활용) web.xml 참고하셈
- * 먼저 , ServletContext객체를 얻는다 
- * getInitParameter("파라메터 키 값");
- * getInitParameter("파라메터 키 값");
-*/
-@WebServlet("/step07/list")
+/* 실습 목표: 제목에 상세보기 링크 걸기
+ *          
+ */
+//@WebServlet("/step03/list")
 public class BoardListServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -25,17 +22,13 @@ public class BoardListServlet extends HttpServlet {
       HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     
-    //ServletContext : 웹어플리케이션 정보를 다루는 도구
     BoardDao boardDao = new BoardDao();
-    
-    ServletContext ctx = this.getServletContext();
     DBConnectionPool dbPool = new DBConnectionPool(
-        ctx.getInitParameter("driver"),    //web.xml의 Context 초기화 파라미터 가져오기 
-        ctx.getInitParameter("url") , 
-        ctx.getInitParameter("user") , 
-        ctx.getInitParameter("password"));
-    
-    
+        this.getInitParameter("driver"),
+        this.getInitParameter("url"),
+        this.getInitParameter("user"),
+        this.getInitParameter("password")
+        );
     boardDao.setDBConnectionPool(dbPool);
     
     List<BoardVo> list = boardDao.selectList();
@@ -67,8 +60,6 @@ public class BoardListServlet extends HttpServlet {
     out.println("  </table>");
     out.println("  </body>");
     out.println("</html>");
-    
-    System.out.println("BoardList::::::::::::::서블릿 실행 완료.... ");
     
   }
 

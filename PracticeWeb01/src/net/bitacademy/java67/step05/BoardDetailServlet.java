@@ -1,19 +1,21 @@
-package net.bitacademy.java67.step07;
+package net.bitacademy.java67.step05;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/* 실습 목표: 서블릿 초기화 파라메터 사용
+/* 실습 목표: doGet(), doPost() 사용하기
+ * - HttpServlet 클래스는 내부적으로 GET, POST, PUT, DELETE 등의 
+ *   클라이언트의 요청 방법에 따라 호출될 메서드를 정의하고 있다.
+ *   doXXX() 메서드이다.
  */
 
-@WebServlet("/step07/detail")
+//@WebServlet("/step03/detail")
 public class BoardDetailServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -35,15 +37,11 @@ public class BoardDetailServlet extends HttpServlet {
     out.println("<h1>게시물 상세정보2</h1>");
     
     BoardDao boardDao = new BoardDao();
-    
-    ServletContext ctx = this.getServletContext();
-    DBConnectionPool dbPool = new DBConnectionPool(
-        ctx.getInitParameter("driver"),    //web.xml의 Context 초기화 파라미터 가져오기 
-        ctx.getInitParameter("url") , 
-        ctx.getInitParameter("user") , 
-        ctx.getInitParameter("password"));
-    
-    boardDao.setDBConnectionPool(dbPool);
+    boardDao.setDBConnectionPool(new DBConnectionPool(
+        this.getInitParameter("driver"),
+        this.getInitParameter("url"),
+        this.getInitParameter("user"),
+        this.getInitParameter("password")));
     BoardVo board = boardDao.select(
         Integer.parseInt(request.getParameter("no")));
     
