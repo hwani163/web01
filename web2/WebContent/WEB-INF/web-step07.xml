@@ -33,9 +33,4 @@
   <filter-name>CharacterEncodingFilter</filter-name>
   <url-pattern>/*</url-pattern>
   </filter-mapping>
-  
-  <!--  리스너 선언 -->
-  <listener>
-  <listener-class>net.bitacademy.java67.step08.MyServletContextListener</listener-class>
-  </listener>
 </web-app>
